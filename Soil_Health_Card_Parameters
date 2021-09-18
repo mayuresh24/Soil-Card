@@ -2,12 +2,13 @@ from PIL import Image
 import pytesseract
 import PIL.ImageOps    
 from pdf2image import convert_from_path
+import csv
 
 #Below line will convert pdf to image
-images = convert_from_path('C:/Users/Hp/Downloads/TN643441-2016-17-13107591.pdf',poppler_path=r"E:/software/poppler-0.67.0/bin")
+#images = convert_from_path('C:/Users/Hp/Downloads/TN643441-2016-17-13107591.pdf',poppler_path=r"E:/software/poppler-0.67.0/bin")
 #For Multiple pages in pdf below line is dedicated
-for i in range(len(images)):
-	images[i].save('page'+ str(i) +'.jpg', 'JPEG')#Name of image will be page0,page1......
+#for i in range(len(images)):
+#	images[i].save('page'+ str(i) +'.jpg', 'JPEG')#Name of image will be page0,page1......
 
 
 #Below is the installed path of tesseract not the path where tesseract is downloaded
@@ -20,44 +21,68 @@ list_all_text=all_text.split()#text from image in list
 #print(list_all_text)
 
 ph_index=list_all_text.index("pH")
-print("ph : ",list_all_text[53])
+ph=list_all_text[53]
+print("ph : ",ph)
 
 EC_index=list_all_text.index("EC")
-print("EC : ",list_all_text[97])
+ec=list_all_text[97]
+print("EC : ",ec)
 
 Carbon_index=list_all_text.index("Carbon")
-print("OC : ",list_all_text[101])
+oc=list_all_text[101]
+print("OC : ",oc)
 
 Nitrogen_index=list_all_text.index("Nitrogen")
-print("Nitrogen : ",list_all_text[105])
+nitrogen=list_all_text[105]
+print("Nitrogen : ",nitrogen)
 
 Phosphorus_index=list_all_text.index("Phosphorus")
-print("Phosphorus_index : ",list_all_text[109])
+phosphorus=list_all_text[109]
+print("Phosphorus : ",phosphorus)
 
 Potassium_index=list_all_text.index("Potassium")
-print("Potassium  : ",list_all_text[115])
+potassium=list_all_text[115]
+print("Potassium  : ",potassium)
 
 Sulphur_index=list_all_text.index("(S)")
-print("Sulphur  : ",list_all_text[120])
+sulphur=list_all_text[120]
+print("Sulphur  : ",sulphur)
 
 Zinc_index_First=list_all_text.index("(Zn)")
 del list_all_text[41]
 Zinc_index_First=list_all_text.index("(Zn)")
-print("Zinc  : ",list_all_text[123])
+zinc=list_all_text[123]
+print("Zinc  : ",zinc)
 
 Fe_index_First=list_all_text.index("(Fe)")
 del list_all_text[44]
 Fe_index_second=list_all_text.index("(Fe)")
-print("Fe  : ",list_all_text[130])
+fe=list_all_text[130]
+print("Fe  : ",fe)
 
 Copper_index=list_all_text.index("Copper")
-print("Copper  : ",list_all_text[138])
+copper=list_all_text[138]
+print("Copper  : ",copper)
 
 Date=list_all_text.index("Collection")
-print("Date Of Collection  : ",list_all_text[169])
+date_collection=list_all_text[169]
+print("Date Of Collection  : ",date_collection)
 
 Latitude_index=list_all_text.index("‘Latitude")
-print("Latitude  : ",list_all_text[193])
+latitude=list_all_text[193]
+print("Latitude  : ",latitude)
 
 Longitude_index=list_all_text.index("Longitude")
-print("Longitude_index  : ",list_all_text[195])
+longitude=list_all_text[195]
+print("Longitude_index  : ",longitude)
+
+fields=['pH','EC','OC','N','P','K','S','Zn','Fe','Cu','Date','Lat','Long'] 
+all_parameters=[[ph,ec,oc,nitrogen,phosphorus,potassium,sulphur,zinc,fe,copper,date_collection,latitude,longitude]]
+print(all_parameters)
+
+filename = "C:/Users/Hp/Downloads/Soil_Health_Tamilnadu.csv"
+    
+with open(filename, 'w') as csvfile: 
+    csvwriter = csv.writer(csvfile) 
+    csvwriter.writerow(fields) 
+    csvwriter.writerows(all_parameters)
