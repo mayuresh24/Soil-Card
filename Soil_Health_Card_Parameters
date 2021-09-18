@@ -1,6 +1,14 @@
 from PIL import Image
 import pytesseract
 import PIL.ImageOps    
+from pdf2image import convert_from_path
+
+#Below line will convert pdf to image
+images = convert_from_path('C:/Users/Hp/Downloads/TN643441-2016-17-13107591.pdf',poppler_path=r"E:/software/poppler-0.67.0/bin")
+#For Multiple pages in pdf below line is dedicated
+for i in range(len(images)):
+	images[i].save('page'+ str(i) +'.jpg', 'JPEG')#Name of image will be page0,page1......
+
 
 #Below is the installed path of tesseract not the path where tesseract is downloaded
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
