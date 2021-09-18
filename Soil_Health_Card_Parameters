@@ -1,0 +1,55 @@
+from PIL import Image
+import pytesseract
+import PIL.ImageOps    
+
+#Below is the installed path of tesseract not the path where tesseract is downloaded
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+image = Image.open('C:/Users/Hp/Downloads/page0.JPG').convert('RGB')
+all_text=((pytesseract.image_to_string(image))) #text from image in string
+
+
+list_all_text=all_text.split()#text from image in list
+#print(list_all_text)
+
+ph_index=list_all_text.index("pH")
+print("ph : ",list_all_text[53])
+
+EC_index=list_all_text.index("EC")
+print("EC : ",list_all_text[97])
+
+Carbon_index=list_all_text.index("Carbon")
+print("OC : ",list_all_text[101])
+
+Nitrogen_index=list_all_text.index("Nitrogen")
+print("Nitrogen : ",list_all_text[105])
+
+Phosphorus_index=list_all_text.index("Phosphorus")
+print("Phosphorus_index : ",list_all_text[109])
+
+Potassium_index=list_all_text.index("Potassium")
+print("Potassium  : ",list_all_text[115])
+
+Sulphur_index=list_all_text.index("(S)")
+print("Sulphur  : ",list_all_text[120])
+
+Zinc_index_First=list_all_text.index("(Zn)")
+del list_all_text[41]
+Zinc_index_First=list_all_text.index("(Zn)")
+print("Zinc  : ",list_all_text[123])
+
+Fe_index_First=list_all_text.index("(Fe)")
+del list_all_text[44]
+Fe_index_second=list_all_text.index("(Fe)")
+print("Fe  : ",list_all_text[130])
+
+Copper_index=list_all_text.index("Copper")
+print("Copper  : ",list_all_text[138])
+
+Date=list_all_text.index("Collection")
+print("Date Of Collection  : ",list_all_text[169])
+
+Latitude_index=list_all_text.index("‘Latitude")
+print("Latitude  : ",list_all_text[193])
+
+Longitude_index=list_all_text.index("Longitude")
+print("Longitude_index  : ",list_all_text[195])
